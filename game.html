@@ -1,4 +1,4 @@
-<body onkeydown="keydown()" onkeyup="keyup()">
+<body onkeydown="keydown(event)" onkeyup="keyup(event)">
 <div style="width:200px;height:100px;border:1px solid green;background-color: blue;position: relative">
   <span id="x" style="background-color: yellow; border:1px solid red;position: absolute;top:10px;left:30px">x</span>
 </div>
@@ -7,44 +7,69 @@
   var x = 10;
   var y = 90;
 
-  var move = 0;
-
-  var dx = 1;
-  var dy = 1;
+  var dx = 0;
+  var dy = 0;
   
   function step() {
-    if (move == 1) {
+      console.log(x + ',' + y + ' ' + dx + ',' + dy);
+      
+      if (x > 200 && dx > 0) {
+	  console.log('A');
+       dx = 0;
+     }
+
+     if (x < 0 && dx < 0) {
+	  console.log('B');
+       dx = 0;
+     }
+
+     if (y > 100 && dy > 0) {
+	  console.log('C');
+       dy = 0;
+     } 
+
+     if (y < 0 && dy < 0) {
+	  console.log('D');
+       dy = 0;
+     }
+
      x += dx;
      y += dy;
 
-     if (x > 200) {
-       dx = -1;
-     }
-
-     if (x < 0) {
-       dx = 1;
-     }
-
-     if (y > 100) {
-       dy = -1;
-     } 
-
-     if (y < 0) {
-       dy = 1;
-     }
-
      document.getElementById('x').style.top = y + 'px';
      document.getElementById('x').style.left = x + 'px';
-    }
   }
+
   window.setInterval(step, 20);
 
-  function keyup() {
-    move = 0;
+  function keyup(event) {
+    if (event.keyCode == 37) {
+	dx = 0;
+    }
+    if (event.keyCode == 38) {
+	dy = 0;
+    }
+    if (event.keyCode == 39) {
+	dx = 0;
+    }
+    if (event.keyCode == 40) {
+	dy = 0;
+    }      
   }
 
-  function keydown() {
-    move = 1;
+function keydown(event) {
+    if (event.keyCode == 37) {
+	dx = -1;
+    }
+    if (event.keyCode == 38) {
+	dy = -1;
+    }
+    if (event.keyCode == 39) {
+	dx = 1;
+    }
+    if (event.keyCode == 40) {
+	dy = 1;
+    }
   }
 </script>
 </body>
