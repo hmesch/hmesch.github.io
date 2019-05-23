@@ -11,25 +11,19 @@
   var dy = 0;
   
   function step() {
-      console.log(x + ',' + y + ' ' + dx + ',' + dy);
-      
       if (x > 200 && dx > 0) {
-	  console.log('A');
        dx = 0;
      }
 
      if (x < 0 && dx < 0) {
-	  console.log('B');
        dx = 0;
      }
 
      if (y > 100 && dy > 0) {
-	  console.log('C');
        dy = 0;
      } 
 
      if (y < 0 && dy < 0) {
-	  console.log('D');
        dy = 0;
      }
 
@@ -57,7 +51,7 @@
     }      
   }
 
-function keydown(event) {
+  function keydown(event) {
     if (event.keyCode == 37) {
 	dx = -1;
     }
