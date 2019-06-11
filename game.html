@@ -1,37 +1,53 @@
-<body onkeydown="keydown(event)" onkeyup="keyup(event)">
-<div style="width:200px;height:100px;border:1px solid green;background-color: blue;position: relative">
-  <span id="x" style="background-color: yellow; border:1px solid red;position: absolute;top:10px;left:30px">x</span>
-</div>
+<html>
+  <title>Helenes Erstes Spiel</title>
+  <head>
+<style>
+  #field {
+  width:1000px;
+  height:500px;
+  border:1px solid green;
+  background-color: blue;
+  position: relative;
+  }
+  #x {
+  background-color: yellow;
+  border:1px solid red;
+  position: absolute;
+  top:10px;left:30px;
+  }
+</style>
 
 <script>
-  var x = 10;
-  var y = 90;
+  var pos = {
+    x: 10,
+    y: 90
+  };
 
   var dx = 0;
   var dy = 0;
   
   function step() {
-      if (x > 200 && dx > 0) {
+     if (pos.x > 1000 && dx > 0) {
        dx = 0;
      }
 
-     if (x < 0 && dx < 0) {
+     if (pos.x < 0 && dx < 0) {
        dx = 0;
      }
 
-     if (y > 100 && dy > 0) {
+     if (pos.y > 500 && dy > 0) {
        dy = 0;
      } 
 
-     if (y < 0 && dy < 0) {
+     if (pos.y < 0 && dy < 0) {
        dy = 0;
      }
 
-     x += dx;
-     y += dy;
+     pos.x += dx;
+     pos.y += dy;
 
-     document.getElementById('x').style.top = y + 'px';
-     document.getElementById('x').style.left = x + 'px';
+     document.getElementById('x').style.top = pos.y + 'px';
+     document.getElementById('x').style.left = pos.x + 'px';
   }
 
   window.setInterval(step, 20);
@@ -66,4 +82,11 @@
     }
   }
 </script>
+
+</head>
+<body onkeydown="keydown(event)" onkeyup="keyup(event)">
+<div id="field">
+  <span id="x">x</span>
+</div>
 </body>
+</html>
