@@ -1,0 +1,14 @@
+#field {
+    width:1000px;
+    height:500px;
+    border:1px solid green;
+    background-color: blue;
+    position: relative;
+}
+
+#x {
+    background-color: yellow;
+    border:1px solid red;
+    position: absolute;
+    top:10px;left:30px;
+}
