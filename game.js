@@ -32,7 +32,7 @@ function init() {
         }
     }
     
-    window.setInterval(step, 5);
+    window.setInterval(step, 10);
 }
 
 function step() {
@@ -60,7 +60,8 @@ function step() {
             dx = 0;
         }
 
-        if (field[i+1][j] == 1) {
+        if (field[i+1][j] == 1 ||
+            field[i+1][j+1] == 1) {
             dx = 0;
         }
         
@@ -69,7 +70,8 @@ function step() {
             dx = 0;
         }
 
-        if (field[i][j] == 1) {
+        if (field[i][j] == 1 ||
+            field[i][j+1] == 1) {
             dx = 0;
         }
     }
@@ -79,7 +81,8 @@ function step() {
             dy = 0;
         }
 
-        if (field[i][j+1] == 1) {
+        if (field[i][j+1] == 1 ||
+            field[i+1][j+1] == 1) {
             dy = 0;
         }
 
@@ -88,7 +91,8 @@ function step() {
             dy = 0;
         }
 
-        if (field[i][j] == 1) {
+        if (field[i][j] == 1 ||
+            field[i+1][j] == 1) {
             dy = 0;
         }
     }
