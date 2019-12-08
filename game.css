@@ -1,6 +1,6 @@
 #field {
-    width:1000px;
-    height:500px;
+    width:200px;
+    height:200px;
     border:1px solid green;
     background-color: blue;
     position: relative;
@@ -10,5 +10,8 @@
     background-color: yellow;
     border:1px solid red;
     position: absolute;
-    top:10px;left:30px;
+    top:10px;
+    left:30px;
+    width:10px;
+    height:10px;
 }

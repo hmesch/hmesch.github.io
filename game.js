@@ -7,7 +7,16 @@ var dx = 0;
 var dy = 0;
 
 function step() {
-    if (pos.x > 1000 && dx > 0) {
+    if (dx == 0 && dy == 0) {
+        return;
+    }
+    
+    var xmax = document.getElementById('field').clientWidth -
+        document.getElementById('x').offsetWidth;
+    var ymax = document.getElementById('field').clientHeight -
+        document.getElementById('x').offsetHeight;
+
+    if (pos.x > xmax && dx > 0) {
         dx = 0;
     }
     
@@ -15,7 +24,7 @@ function step() {
         dx = 0;
     }
     
-    if (pos.y > 500 && dy > 0) {
+    if (pos.y > ymax && dy > 0) {
         dy = 0;
     } 
     
@@ -30,7 +39,7 @@ function step() {
     document.getElementById('x').style.left = pos.x + 'px';
 }
 
-window.setInterval(step, 20);
+window.setInterval(step, 5);
 
 function keyup(event) {
     if (event.keyCode == 37) {
