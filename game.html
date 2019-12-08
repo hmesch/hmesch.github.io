@@ -5,7 +5,9 @@
     <script src="game.js"></script>
   </head>
 
-  <body onkeydown="keydown(event)" onkeyup="keyup(event)">
+  <body onload="init()"
+        onkeydown="keydown(event)"
+        onkeyup="keyup(event)">
     <div id="field">
       <span id="x"></span>
     </div>

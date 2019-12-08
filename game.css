@@ -15,3 +15,10 @@
     width:10px;
     height:10px;
 }
+
+.rock {
+    background-color: green;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+}
