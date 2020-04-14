@@ -1,7 +1,23 @@
 var dx = 0;
 var dy = 0;
 
-var field =
+function transpose(field) {
+    var field2 = [];
+    var I = field[0].length;
+    var J = field.length;
+    for (var i = 0; i < I; ++i) {
+        field2.push([]);
+        for (var j = 0; j < J; ++j ) {
+            field2[i][j] = field[j][i];
+        }
+    }
+    return field2;
+}
+
+            
+        
+
+var field = transpose(
     [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
      [0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,1,0,0,0,0],
      [0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0],
@@ -21,7 +37,7 @@ var field =
      [0,1,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0],
      [0,0,1,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0],
-     [0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0]];
+     [0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0]]);
 
 function init() {
     var I = Math.ceil(document.getElementById('field').clientWidth /
