@@ -8,12 +8,12 @@
 
 #x {
     background-color: yellow;
-    border:1px solid red;
+    border: 1px solid red;
     position: absolute;
-    top:10px;
-    left:30px;
-    width:10px;
-    height:10px;
+    top: 10px;
+    left: 30px;
+    width: 5px;
+    height: 5px;
 }
 
 .rock {
