@@ -32,7 +32,7 @@ var field = transpose(
      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
      [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-     [0,0,2,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],
+     [0,2,2,2,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],
      [0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],
      [0,0,1,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0],
@@ -78,56 +78,62 @@ function step() {
     var posx = document.getElementById('x').offsetLeft;
     var posy = document.getElementById('x').offsetTop;
 
-    var i0 = Math.floor(posx / cellSize);
-    var j0 = Math.floor(posy / cellSize);
+    var posx1 = posx + dx;
+    var posy1 = posy + dy;
+    
+    var i0 = Math.floor(posx1 / cellSize);
+    var j0 = Math.floor(posy1 / cellSize);
 
-    var i1 = Math.floor((posx + xm)/ cellSize);
-    var j1 = Math.floor((posy + ym)/ cellSize);
+    var i1 = Math.floor((posx1 + xm)/ cellSize);
+    var j1 = Math.floor((posy1 + ym)/ cellSize);
+
+    var dx1 = dx;
+    var dy1 = dy;
     
     if (dx > 0) {
-        if (posx > xmax) {
-            dx = 0;
+        if (posx1 > xmax) {
+            dx1 = 0;
         }
 
         if (field[i1][j0] == 1 ||
             field[i1][j1] == 1) {
-            dx = 0;
+            dx1 = 0;
         }
         
     } else if (dx < 0) {
-        if (posx < 0) {
-            dx = 0;
+        if (posx1 < 0) {
+            dx1 = 0;
         }
 
         if (field[i0][j0] == 1 ||
             field[i0][j1] == 1) {
-            dx = 0;
+            dx1 = 0;
         }
     }
 
     if (dy > 0) {
-        if (posy > ymax) {
-            dy = 0;
+        if (posy1 > ymax) {
+            dy1 = 0;
         }
 
         if (field[i1][j0] == 1 ||
             field[i1][j1] == 1) {
-            dy = 0;
+            dy1 = 0;
         }
 
     } else if (dy < 0) {
-        if (posy < 0) {
-            dy = 0;
+        if (posy1 < 0) {
+            dy1 = 0;
         }
 
         if (field[i0][j0] == 1 ||
             field[i0][j1] == 1) {
-            dy = 0;
+            dy1 = 0;
         }
     }
     
-    posx += dx;
-    posy += dy;
+    posx += dx1;
+    posy += dy1;
     
     document.getElementById('x').style.top = posy + 'px';
     document.getElementById('x').style.left = posx + 'px';
