@@ -43,20 +43,6 @@ function init() {
                       document.getElementById('x').clientWidth);
     var J = Math.ceil(document.getElementById('field').clientHeight /
                       document.getElementById('x').clientHeight);
-
-    // Hier fuellen wir das Feld.
-    /* Kommentar */
-    /* for (var i = 0; i < I; ++i) {
-        field.push([]);
-        for (var j = 0; j < J; ++j) {
-            if (Math.random() > 0.9) {
-                field[i].push(1);
-            } else {
-                field[i].push(0);
-            }
-        }
-	}*/
-    
     
     for (var i = 0; i < field.length; ++i) {
         for (var j = 0; j < field[i].length; ++j) {
@@ -70,6 +56,8 @@ function init() {
         }
     }
     
+    window.document.body.onkeydown = keydown;
+    window.document.body.onkeyup = keyup;
     window.setInterval(step, 10);
 }
 
