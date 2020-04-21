@@ -16,8 +16,10 @@
     height: 5px;
 }
 
-.rock {
+.show .rock {
     background-color: green;
+}
+.rock {
     position: absolute;
     width: 10px;
     height: 10px;

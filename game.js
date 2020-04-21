@@ -156,7 +156,10 @@ function keyup(event) {
         dy = 0;
         event.preventDefault();
     }
-    showd();
+    if (event.keyCode == 83) {
+        document.getElementById('field').className = '';
+    }
+    showd(event.keyCode);
 }
 
 function keydown(event) {
@@ -176,10 +179,15 @@ function keydown(event) {
         dy = 1;
         event.preventDefault();
     }
-    showd();
+    if (event.keyCode == 83) {
+        document.getElementById('field').className = 'show';
+    }
+    showd(event.keyCode);
 }
 
-function showd() {
+function showd(keycode) {
     document.getElementById('dx').innerText = dx;
     document.getElementById('dy').innerText = dy;
+    document.getElementById('key').innerText = keycode;
 }
+
