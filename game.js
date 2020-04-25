@@ -1,7 +1,7 @@
 var dx = 0;
 var dy = 0;
 
-const cellSize = 10;
+var cellSize = 10;
 
 function transpose(field) {
     var field2 = [];
@@ -18,39 +18,53 @@ function transpose(field) {
 
 var field = transpose(
     [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-     [1,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0],
-     [1,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0],
-     [1,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0],
-     [1,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0],
-     [1,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0],
-     [1,0,0,0,0,0,0,0,0,2,1,1,1,01,1,1,1,1,1,1],
-     [1,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0],
-     [1,0,0,0,1,1,1,0,0,2,0,0,0,0,0,0,0,0,0,0],
+     [1,0,0,1,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0],
      [1,0,0,0,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0],
-     [1,1,0,0,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0],
+     [1,0,0,0,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0],
+     [1,0,0,1,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0],
+     [1,0,0,1,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0],
+     [1,0,0,1,0,0,1,0,0,2,1,1,1,1,1,1,1,1,1,1],
+     [1,0,0,1,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0],
+     [1,0,0,1,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0],
+     [1,0,0,1,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0],
+     [1,1,1,1,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,1,1,1,2,0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-     [0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0],
-     [0,0,1,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0],
-     [0,0,1,1,1,1,1,0,0,1,1,1,2,2,1,1,1,1,1,1],
-     [0,0,1,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0],
-     [0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],
-     [0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0]]);
+     [0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+     [0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+     [0,0,1,1,1,1,0,0,0,0,1,1,2,2,1,1,1,1,1,1],
+     [0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]);
 
 function init() {
-    var I = Math.ceil(document.getElementById('field').clientWidth /
-                      document.getElementById('x').clientWidth);
-    var J = Math.ceil(document.getElementById('field').clientHeight /
-                      document.getElementById('x').clientHeight);
+    var I = field.length;
+    var J = field[0].length;
+    var w = Math.floor(window.innerWidth / I);
+    var h = Math.floor(window.innerHeight / J);
+    if (w < h) {
+        cellSize = w;
+    } else {
+        cellSize = h;
+    }
     
-    for (var i = 0; i < field.length; ++i) {
-        for (var j = 0; j < field[i].length; ++j) {
+    var f = document.getElementById('field');
+    f.style.width = (I * cellSize)+'px';
+    f.style.height = (J * cellSize)+'px';
+    var x = document.getElementById('x');
+    x.style.width = x.style.height =Math.floor(cellSize/2)+'px'; 
+    x.style.top = (3 * cellSize)+'px';
+    x.style.left = (3 * cellSize)+'px';
+    for (var i = 0; i < I; ++i) {
+        for (var j = 0; j < J; ++j) {
             if (field[i][j] >  0) {
                 var e = document.createElement('div');
                 e.className = 'rock';
                 e.style.top = (j * cellSize) + 'px';
                 e.style.left = (i * cellSize) + 'px';
+                e.style.height = e.style.width = ( cellSize ) + 'px';
+                
                 document.getElementById('field').appendChild(e);
             }
         }
