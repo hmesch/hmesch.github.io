@@ -1,6 +1,6 @@
 var dx = 0;
 var dy = 0;
-
+var visible = false;
 var cellSize = 10;
 
 function transpose(field) {
@@ -80,6 +80,10 @@ function step() {
         return;
     }
 
+    if (visible) {
+        return;
+    }
+    
     var xsize = document.getElementById('field').clientWidth;
     var ysize = document.getElementById('field').clientHeight;
 
@@ -172,6 +176,7 @@ function keyup(event) {
     }
     if (event.keyCode == 83) {
         document.getElementById('field').className = '';
+        visible = false;
     }
     showd(event.keyCode);
 }
@@ -195,6 +200,7 @@ function keydown(event) {
     }
     if (event.keyCode == 83) {
         document.getElementById('field').className = 'show';
+        visible = true;
     }
     showd(event.keyCode);
 }
