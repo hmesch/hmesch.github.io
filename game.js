@@ -2,7 +2,8 @@ var dx = 0;
 var dy = 0;
 var visible = false;
 var cellSize = 10;
-
+var posx = 3;
+var posy = 3;
 function transpose(field) {
     var field2 = [];
     var I = field[0].length;
@@ -38,7 +39,9 @@ var field = transpose(
      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]);
 
-function init() {
+var walls = [];
+
+function draw() {
     var I = field.length;
     var J = field[0].length;
     var w = Math.floor(window.innerWidth / I);
@@ -54,8 +57,8 @@ function init() {
     f.style.height = (J * cellSize)+'px';
     var x = document.getElementById('x');
     x.style.width = x.style.height =Math.floor(cellSize/2)+'px'; 
-    x.style.top = (3 * cellSize)+'px';
-    x.style.left = (3 * cellSize)+'px';
+    x.style.top = (posy * cellSize)+'px';
+    x.style.left = (posx * cellSize)+'px';
     for (var i = 0; i < I; ++i) {
         for (var j = 0; j < J; ++j) {
             if (field[i][j] >  0) {
@@ -66,13 +69,27 @@ function init() {
                 e.style.height = e.style.width = ( cellSize ) + 'px';
                 
                 document.getElementById('field').appendChild(e);
+                walls.push(e);
             }
         }
     }
-    
+}
+
+function refresh() {
+    var f = document.getElementById('field');
+    for (var i = 0; i < walls.length; ++i) {
+        f.removeChild(walls[i]);
+    }
+    walls = [];
+    draw();
+}
+
+function init() {
+    draw();
     window.document.body.onkeydown = keydown;
     window.document.body.onkeyup = keyup;
     window.setInterval(step, 10);
+    window.onresize = refresh;
 }
 
 function step() {
@@ -93,11 +110,11 @@ function step() {
     var xmax = xsize - document.getElementById('x').offsetWidth;
     var ymax = ysize - document.getElementById('x').offsetHeight;
 
-    var posx = document.getElementById('x').offsetLeft;
-    var posy = document.getElementById('x').offsetTop;
+    var posx0 = document.getElementById('x').offsetLeft;
+    var posy0 = document.getElementById('x').offsetTop;
 
-    var posx1 = posx + dx;
-    var posy1 = posy + dy;
+    var posx1 = posx0 + dx;
+    var posy1 = posy0 + dy;
     
     var i0 = Math.floor(posx1 / cellSize);
     var j0 = Math.floor(posy1 / cellSize);
@@ -150,11 +167,14 @@ function step() {
         }
     }
     
-    posx += dx1;
-    posy += dy1;
+    posx0 += dx1;
+    posy0 += dy1;
+
+    posx = posx0 / cellSize;
+    posy = posy0 / cellSize;
     
-    document.getElementById('x').style.top = posy + 'px';
-    document.getElementById('x').style.left = posx + 'px';
+    document.getElementById('x').style.top = posy0 + 'px';
+    document.getElementById('x').style.left = posx0 + 'px';
 }
 
 function keyup(event) {
