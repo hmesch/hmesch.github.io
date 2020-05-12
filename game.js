@@ -4,6 +4,8 @@ var visible = false;
 var cellSize = 10;
 var posx = 3;
 var posy = 3;
+var level = 0;
+
 function transpose(field) {
     var field2 = [];
     var I = field[0].length;
@@ -17,7 +19,7 @@ function transpose(field) {
     return field2;
 }
 
-var field = transpose(
+var field= [transpose(
     [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
      [1,0,0,1,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0],
      [1,0,0,0,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0],
@@ -37,13 +39,13 @@ var field = transpose(
      [0,0,1,1,1,1,0,0,0,0,1,1,2,2,1,1,1,1,1,1],
      [0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]);
+     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]])];
 
 var walls = [];
 
 function draw() {
-    var I = field.length;
-    var J = field[0].length;
+    var I = field[level].length;
+    var J = field[level][0].length;
     var w = Math.floor(window.innerWidth / I);
     var h = Math.floor(window.innerHeight / J);
     if (w < h) {
@@ -61,7 +63,7 @@ function draw() {
     x.style.left = (posx * cellSize)+'px';
     for (var i = 0; i < I; ++i) {
         for (var j = 0; j < J; ++j) {
-            if (field[i][j] >  0) {
+            if (field[level][i][j] >  0) {
                 var e = document.createElement('div');
                 e.className = 'rock';
                 e.style.top = (j * cellSize) + 'px';
@@ -130,8 +132,8 @@ function step() {
             dx1 = 0;
         }
 
-        if (field[i1][j0] == 1 ||
-            field[i1][j1] == 1) {
+        if (field[level][i1][j0] == 1 ||
+            field[level][i1][j1] == 1) {
             dx1 = 0;
         }
         
@@ -140,8 +142,8 @@ function step() {
             dx1 = 0;
         }
 
-        if (field[i0][j0] == 1 ||
-            field[i0][j1] == 1) {
+        if (field[level][i0][j0] == 1 ||
+            field[level][i0][j1] == 1) {
             dx1 = 0;
         }
     }
@@ -151,8 +153,8 @@ function step() {
             dy1 = 0;
         }
 
-        if (field[i1][j0] == 1 ||
-            field[i1][j1] == 1) {
+        if (field[level][i1][j0] == 1 ||
+            field[level][i1][j1] == 1) {
             dy1 = 0;
         }
 
@@ -161,8 +163,8 @@ function step() {
             dy1 = 0;
         }
 
-        if (field[i0][j0] == 1 ||
-            field[i0][j1] == 1) {
+        if (field[level][i0][j0] == 1 ||
+            field[level][i0][j1] == 1) {
             dy1 = 0;
         }
     }
